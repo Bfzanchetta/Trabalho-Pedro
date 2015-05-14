@@ -18,12 +18,12 @@ void informaDNS(){
         struct hostent *host;
         struct sockaddr_in server_addr;  
 
-        host = gethostbyname("192.168.1.72");
+        host = gethostbyname("192.168.1.29");
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
             perror("Socket");
             exit(1);
-        }
+        }	
 
         server_addr.sin_family = AF_INET;     
         server_addr.sin_port = htons(9005);   
@@ -41,17 +41,8 @@ void informaDNS(){
 	   printf("2, 3 ou 4?");
            gets(send_data);
            
-          if (strcmp(send_data , "q") != 0 && strcmp(send_data , "Q") != 0){
+          
            send(sock,send_data,strlen(send_data), 0); 
- 	   close(sock);					//comunicacao persistente//   sincrona//
-	   exit(1);
-	}
-	
-          else
-          {
-           send(sock,send_data,strlen(send_data), 0);   
-        	
-          }
 	  
 
           bytes_recieved=recv(sock,recv_data,1024,0);
@@ -69,7 +60,6 @@ void informaDNS(){
           
 
 	//close(sock);
-	printf("EPAPAPAPAP");
 	
 }
 
@@ -110,7 +100,7 @@ int main()
             exit(1);
         }
 		
-	printf("\nTCPServer Waiting for client on port 9006");
+	printf("\nRegular game room waiting for player on port 9006");
         fflush(stdout);
 
 	
