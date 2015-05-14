@@ -82,7 +82,7 @@ int main()
             exit(1);
         }
 		
-	printf("\nTCPServer Waiting for client on port 9005");
+	printf("\nDNS Server Waiting for client on port 9005");
         fflush(stdout);
 
 
@@ -108,19 +108,19 @@ int main()
             	//Se a conexao do DNS nao for interrompida a string sera processada e a decisao tomada
             if(strcmp(recv_data , "IP")==0){      //procura o ip no banco de dados do DNS//
 			send_data=procuraIP();    //Vai receber os IPs de servers prontos pro jogo
-			send(connected, send_data, 1024 , 0); 
+			send(sock, send_data, 1024 , 0); 
 	    }
 	    else if(strcmp(recv_data , "2p")==0){  //Procura os ips das partidas com 2 players//
 			send_data=procuraNumero('2');
-			send(connected, send_data, 1024 , 0);
-	    }
+			send(sock, send_data, 1024 , 0);	    
+			}
 	    else if(strcmp(recv_data , "3p")==0){  //Procura os ips das partidas com 3 players//
 			send_data=procuraNumero('3');
-			send(connected, send_data, 1024 , 0);
+			send(sock, send_data, 1024 , 0);
 	    }
 	    else if(strcmp(recv_data , "4p")==0){  //Procura os ips das partidas com 4 players//
 			send_data=procuraNumero('4');
-			send(connected, send_data, 1024 , 0);
+			send(sock, send_data, 1024 , 0);
 	    }
 	    else if((recv_data == '2') || (recv_data== '3') || (recv_data=='4')){
 			armazenaIP(inet_ntoa(client_addr.sin_addr),ntohs(client_addr.sin_port),recv_data);
@@ -128,12 +128,12 @@ int main()
             		fflush(stdout);
 		
             		send_data="IP anotado";               
-            		send(connected, send_data, 10, 0);
+            		send(sock, send_data, 10, 0);
 	    }
 	    else{
 			printf("\nMensagem nao reconhecida");
 			send_data="Mensagem nao reconhecida"; 
-			send(connected, send_data, 25 , 0);         
+			send(sock, send_data, 25 , 0);         
 	    }	
                
       	//free(send_data);
