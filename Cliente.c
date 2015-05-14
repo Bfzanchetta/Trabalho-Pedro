@@ -17,7 +17,7 @@ void consultaDNS(){				//funcao pelo qual o cliente se comunica com o DNS
         struct hostent *host;
         struct sockaddr_in server_addr;  
 
-        host = gethostbyname("192.168.1.72");
+        host = gethostbyname("192.168.1.29");
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
             perror("Socket");
@@ -71,14 +71,14 @@ int main()
 
 
 {
-	void consultaDNS();	
+	//void consultaDNS();	
 	char* ipDesejado[15];
         int sock, bytes_recieved;  
         char send_data[1024],recv_data[1024];
         struct hostent *host;
         struct sockaddr_in server_addr;  
 
-        host = gethostbyname("192.168.1.72");
+        host = gethostbyname("192.168.1.29");
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
             perror("Socket");
@@ -89,7 +89,7 @@ int main()
 	//scanf("%c","192.168.1.72");
 
         server_addr.sin_family = AF_INET;     
-        server_addr.sin_port = htons(9005);  	//Se conecta ao ip escrito 
+        server_addr.sin_port = htons(9006);  	//Se conecta ao ip escrito 
         server_addr.sin_addr = *((struct in_addr *)host->h_addr);
         bzero(&(server_addr.sin_zero),8); 
 
